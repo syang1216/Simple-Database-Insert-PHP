@@ -47,10 +47,10 @@
     $username = "";
     $email = "";
     if(is_post_request()){
-      $first_name = $_POST['fn'];
-      $last_name = $_POST['ln'];
-      $username = $_POST['username'];
-      $email = $_POST['email'];
+      $first_name = h($_POST['fn']);
+      $last_name = h($_POST['ln']);
+      $username = h($_POST['username']);
+      $email = h($_POST['email']);
       $errors = [];
 
       if(is_blank($first_name)){
@@ -95,6 +95,11 @@
           die("connection failed: " . $conn->connect_error);
         }
 
+        $first_name = $first_name;
+        $last_name = $last_name;
+        $username = $username;
+        $email = $email;
+
         $sql = "select * from users where username='" . $username . "';";
         $result = mysqli_query($conn, $sql);
         if(mysqli_num_rows($result)){
@@ -119,10 +124,10 @@
 
   <!-- TODO: HTML form goes here -->
   <form method="POST" action="<?php echo $_SERVER['PHP_SELF'];?>">
-    first name</br> <input type="text" name="fn" value="<?php echo h($first_name); ?>"/>  </br>
-    last name</br><input type="text" name='ln' value="<?php echo h($last_name); ?>"/>  </br>
-    email</br><input type="text" name="email" value="<?php echo h($email); ?>"/>  </br>
-    username</br><input type="text" name='username' value="<?php echo h($username); ?>"/>  </br>
+    first name</br> <input type="text" name="fn" value="<?php echo $first_name; ?>"/>  </br>
+    last name</br><input type="text" name='ln' value="<?php echo $last_name; ?>"/>  </br>
+    email</br><input type="text" name="email" value="<?php echo $email; ?>"/>  </br>
+    username</br><input type="text" name='username' value="<?php echo $username; ?>"/>  </br>
     <input type="submit" value="Submit"/> </br>
   </form>
 
