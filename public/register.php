@@ -95,10 +95,6 @@
           die("connection failed: " . $conn->connect_error);
         }
 
-        $first_name = $first_name;
-        $last_name = $last_name;
-        $username = $username;
-        $email = $email;
 
         $sql = "select * from users where username='" . $username . "';";
         $result = mysqli_query($conn, $sql);
